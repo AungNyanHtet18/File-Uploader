@@ -1,43 +1,68 @@
 'use client'
 
+import CustomInput from "@/components/custom/custom-input";
 import PageTitle from "@/components/page-title";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { FormSchema, FormType } from "@/lib/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FolderOpen, Save, Trash2, UploadCloud } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, RefObject, useRef } from "react";
 import { useForm } from "react-hook-form";
+import * as userClient from '@/lib/User/user-client'
+
 
 export default function Page() {
- 
-    const fileInputRef = useRef<HTMLInputElement | null>(null)
+   
+   const router = useRouter();
+
+   const fileInputRef = useRef<HTMLInputElement | null>(null)
     
     const form = useForm<FormType>({
        resolver: zodResolver(FormSchema),
-       defaultValues: {file: undefined}
+       defaultValues: {
+         image: undefined,
+         name: "",
+         email: "",
+         phone: ""
+      }
+
     })
 
-    const saveAction = (form: FormType) => {
-      if (!form.file) return;
-       console.log(JSON.stringify({file: form.file.name}, null , 2));
+    const saveAction = async (form: FormType) => {
+      
+      if (!form.image) return;
+       console.log(JSON.stringify({file: form.image.name}, null , 2));
+      
+
+         console.log('before reaching form data');
+         const formData = new FormData();
+         formData.append("username",form.name);
+         formData.append("email",form.email);
+         formData.append("phone",form.phone);
+         formData.append("image",form.image);
+
+
+       const result = await userClient.save(formData)
+
+       router.push(`/info/${result.id}`)
     }
 
     const clearAction = ()=> {
        form.reset()
     }
 
-
     const changeFile = (e: ChangeEvent<HTMLInputElement>) => {
        const file = e.target.files?.[0]
 
        if(file) {
-         form.setValue("file", file, {shouldValidate: true} )
+         form.setValue("image", file, {shouldValidate: true} )
        }
     }
 
 
-    const imageFile = form.watch('file')
+    const imageFile = form.watch('image')
 
      return (
        <section className="py-4 px-8 h-dvh">
@@ -65,8 +90,10 @@ export default function Page() {
                      
                </div>
                <div className="col-span-2">
-                  <h3>Member Details</h3>
-                  
+                  <h3 className="text-xl font-semibold mb-2">Member Details</h3>
+                  <CustomInput  control={form.control} path="name" label="User Name" className="mb-2 text-3xl w-3/4" />
+                  <CustomInput  control={form.control} path="email" label="Email" className="mb-2 text-3xl w-3/4 mt-4" />
+                  <CustomInput  control={form.control} path="phone" label="Phone" className="mb-2 text-3xl w-3/4 mt-4" />
                </div>
             </div>
          </form>

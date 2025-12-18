@@ -4,7 +4,10 @@ import z from 'zod'
 export type IconType = keyof typeof lucideIcons
 
 export const FormSchema = z.object({
-     file: z.file()
+     image: z.file(),
+     name: z.string().nonempty("Enter user name"),
+     email: z.string().nonempty("Enter Email").regex(z.regexes.email,"Invalid Email Format"),
+     phone: z.string().regex(z.regexes.number, "Phone number must be digit")
 })
 
 export  type FormType = z.infer<typeof FormSchema>

@@ -16,7 +16,7 @@ export default function CustomInput<T extends FieldValues>({control, path, label
      return (
         <FormField control={control} name={path} render={({field}) => 
             <FormItem className= {className}>
-                {label && <FormLabel>{label}</FormLabel>}
+                {label && <FormLabel className="text-base">{label}</FormLabel>}
                 
                 <FormControl>
                     <Input {...field} type={type || 'text'} placeholder={`Enter ${label}`}

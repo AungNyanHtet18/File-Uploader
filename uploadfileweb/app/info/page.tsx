@@ -2,7 +2,7 @@ export default function Page() {
      return (
       <>
         <h1>
-           File Info your are missing something
+           File Info 
         </h1>
       </>
      )
