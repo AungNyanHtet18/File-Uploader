@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav className="py-4 px-8 w-full flex items-center justify-between  bg-black text-white sticky top-0">
+        <nav className="py-4 px-8 w-full flex items-center justify-between  bg-black text-white sticky top-0 z-10">
           <h3 className="text-xl">
             <Link href={`/`}>
                 Home
@@ -24,9 +24,6 @@ export default function RootLayout({
           <ul className="flex gap-8">
             <li>
                <Link href={`/upload`}>Upload</Link>
-             </li>
-             <li>
-                <Link href={`/info`}>Info</Link>
              </li>
           </ul>
         </nav>

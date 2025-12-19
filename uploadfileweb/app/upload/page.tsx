@@ -35,14 +35,11 @@ export default function Page() {
       if (!form.image) return;
        console.log(JSON.stringify({file: form.image.name}, null , 2));
       
-
-         console.log('before reaching form data');
          const formData = new FormData();
          formData.append("username",form.name);
          formData.append("email",form.email);
          formData.append("phone",form.phone);
          formData.append("image",form.image);
-
 
        const result = await userClient.save(formData)
 

@@ -119,4 +119,12 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .background-img{
+     background-image: url("../public/images/Batman.jpeg");
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: center;
+     height: 100vh;
+  }
 }

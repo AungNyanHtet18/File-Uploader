@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dev.upload.api.input.UserForm;
 import com.dev.upload.api.output.ModificationResult;
+import com.dev.upload.exception.BusinessException;
+import com.dev.upload.model.entity.User;
 import com.dev.upload.model.repo.UserRepo;
 
 @Service
@@ -42,9 +44,12 @@ public class UserService {
 		   throw new RuntimeException(e);
 	  }
 		
-		
 	}
 	
+	
+	public User findById(int id) {
+		return repo.findById(id).orElseThrow(() -> new BusinessException("User account is not found"));
+	}
 	
 	public String uploadImage(MultipartFile file) throws IOException  { 
 		
@@ -58,7 +63,7 @@ public class UserService {
 		var filePath = uploadPath.resolve(fileName);
 		Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 		
-		return filePath.toString();
+		return "/upload/"+ fileName;
 		
 	}
 	

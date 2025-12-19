@@ -1,9 +1,5 @@
 export default function Page() {
      return (
-      <>
-        <h1>
-           File Info 
-        </h1>
-      </>
+        <h1>Page Info</h1>
      )
 }
