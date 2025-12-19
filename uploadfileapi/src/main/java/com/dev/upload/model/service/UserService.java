@@ -33,6 +33,11 @@ public class UserService {
 	public ModificationResult<Integer> upload(MultipartFile file, UserForm form) {
 		
 	  try {
+		  	repo.findByEmail(form.email())
+		  		.ifPresent(user -> {
+		  		 throw	new BusinessException("%s existed. Choose another email.".formatted(user.getEmail())); 
+		  		 });
+		  
 		   var imagesPath = uploadImage(file);
 		   logger.info("User Image Path: {}", imagesPath);
 		   
