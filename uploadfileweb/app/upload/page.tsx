@@ -4,13 +4,14 @@ import CustomInput from "@/components/custom/custom-input";
 import PageTitle from "@/components/page-title";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { FormSchema, FormType } from "@/lib/type";
+import { ClientError, FormSchema, FormType } from "@/lib/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FolderOpen, Save, Trash2, UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, RefObject, useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as userClient from '@/lib/User/user-client'
+import { exceptionHandle } from "@/lib/exception-handler";
 
 
 export default function Page() {
@@ -41,9 +42,10 @@ export default function Page() {
          formData.append("phone",form.phone);
          formData.append("image",form.image);
 
-       const result = await userClient.save(formData)
-
-       router.push(`/info/${result.id}`)
+        exceptionHandle(async ()=> {
+            const result = await userClient.save(formData)
+             router.push(`/info/${result.id}`)
+        }) 
     }
 
     const clearAction = ()=> {

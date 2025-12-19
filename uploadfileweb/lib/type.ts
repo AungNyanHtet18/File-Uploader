@@ -3,6 +3,12 @@ import z from 'zod'
 
 export type IconType = keyof typeof lucideIcons
 
+export type ClientError = {
+     type: string
+     messages: string[]
+}
+
+
 export const FormSchema = z.object({
      image: z.file(),
      name: z.string().nonempty("Enter user name"),
@@ -20,3 +26,5 @@ export type User ={
     phone: string
     imagePath: string
 }
+
+

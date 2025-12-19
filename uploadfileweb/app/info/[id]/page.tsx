@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { findById } from "@/lib/User/user-client";
 import { ClientRequest } from "@/lib/data-fetching";
 import { Circle, Search } from "lucide-react";
-
+import Image from "next/image";
 
 export default async function Page({params} : {params: Promise<{id: string}>}) {
 
@@ -16,7 +16,7 @@ export default async function Page({params} : {params: Promise<{id: string}>}) {
      return (
       <div className="flex h-full gap-12">
          <div className="flex-1 border rounded-3xl shadow-lg w-full ">
-            <img src={`${ClientRequest}${result.imagePath}`} width={500} height={500} alt="User Image" className="rounded-t-3xl" style={{width: "100%", height: "55%"}}/>
+            <Image src={`${ClientRequest}${result.imagePath}`} width={100} height={100} alt="User Image" className="rounded-t-3xl object-cover" style={{width: "100%", height: "55%"}} unoptimized/>
 
             <FlexComponent>
                <h3 className="text-2xl font-semibold">My Profile</h3>
@@ -27,12 +27,12 @@ export default async function Page({params} : {params: Promise<{id: string}>}) {
             </FlexComponent>
 
             <FlexComponent className="underline underline-offset-5 text-[16px]">
-               <p className="text-zinc-600">Schmi Rohman</p>
-               <p>+1 850-594-998-1236</p>
+               <p className="text-zinc-600">{result.name}</p>
+               <p>{result.phone}</p>
             </FlexComponent>
 
             <div className="px-5 py-3 underline underline-offset-5 text-[16px]">
-               <p className="text-zinc-600">Schmi@gmail.com</p>
+               <p className="text-zinc-600">{result.email}</p>
             </div>
 
             <FlexComponent>

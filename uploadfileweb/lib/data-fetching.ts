@@ -11,7 +11,11 @@ export async function create({endPoint, formData} : {endPoint: string, formData:
     })
 
     if(!response.ok) {
-         throw new Error("Upload Failed")
+         const message = await response.json() as string[]
+         throw JSON.stringify({
+          type: "Client Error",
+          messages: message
+     })
     }
 
     return await response.json()
