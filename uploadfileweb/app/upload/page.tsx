@@ -16,8 +16,7 @@ import { exceptionHandle } from "@/lib/exception-handler";
 
 export default function Page() {
    
-   const router = useRouter();
-
+   const router = useRouter()
    const fileInputRef = useRef<HTMLInputElement | null>(null)
     
     const form = useForm<FormType>({
@@ -28,7 +27,6 @@ export default function Page() {
          email: "",
          phone: ""
       }
-
     })
 
     const saveAction = async (form: FormType) => {
@@ -60,7 +58,6 @@ export default function Page() {
        }
     }
 
-
     const imageFile = form.watch('image')
 
      return (
@@ -85,7 +82,7 @@ export default function Page() {
 
                   <input onChange={changeFile} ref={fileInputRef} type="file" className="hidden" />
 
-               <ImageButton fileInputRef={fileInputRef} imageFile={imageFile} clearAction={clearAction} />
+                  <ImageButton fileInputRef={fileInputRef} imageFile={imageFile} clearAction={clearAction} />
                      
                </div>
                <div className="col-span-2">

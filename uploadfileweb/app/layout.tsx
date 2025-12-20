@@ -31,8 +31,8 @@ export default function RootLayout({
         </nav>
 
           {children}
-        </main>
 
+        </main>
         <Toaster position="top-center" duration={1 * 4000} />
       </body>
     </html>

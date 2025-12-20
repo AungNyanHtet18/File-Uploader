@@ -11,7 +11,6 @@ export default async function Page({params} : {params: Promise<{id: string}>}) {
    const {id} = await params 
 
    const result = await findById(id)
-   console.log(result.imagePath);
 
      return (
       <div className="flex h-full gap-12">
@@ -67,7 +66,7 @@ export default async function Page({params} : {params: Promise<{id: string}>}) {
 
                   <Button className="w-30  rounded-3xl bg-gradient-to-tr from-rose-500 to-purple-500 hover:bg-gradient-to-bl  transition-all duration-500 cursor-pointer">
                       Block Account
-                   </Button>
+                  </Button>
                </FlexComponent>
 
                <FlexComponent>
@@ -80,7 +79,6 @@ export default async function Page({params} : {params: Promise<{id: string}>}) {
                       Block Account
                    </Button>
                </FlexComponent>
- 
             </div>
 
             <div className="flex-1 rounded-3xl border-2 shadow-md">
@@ -95,10 +93,8 @@ export default async function Page({params} : {params: Promise<{id: string}>}) {
                <AccountStatusAction title="Internet bill" circleColor="red" buttonName="Not Paid" buttonColor="from-rose-500 to-purple-500"/>
                <AccountStatusAction title="House Rent" buttonName="Not Paid"/>
                <AccountStatusAction title="Income Tax" buttonName="Not Paid"/>
-               
-               
+                  
             </div>
-           
          </div>
       </div>
      )

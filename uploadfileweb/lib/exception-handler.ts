@@ -10,7 +10,6 @@ export async function exceptionHandle(func: ()=> Promise<void>) {
 
         if(e.message) {
             const error = JSON.parse(e.message) // error == Javascript Object
-            console.log(error)
 
             if(error?.type == "Client Error") {
             const clientError = error as ClientError
